@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Dx: HW Customization Rule" type="ResourceObjectCustomization">
+  <Source>
+  import org.apache.log4j.Logger;
+   import sailpoint.object.Identity;
+  import sailpoint.object.Application;
+  import java.util.Map;
+  import java.util.HashMap;
+  		
+		Logger customLogger= Logger.getLogger("dexperts.us");
+		customLogger.info("I am from Hw customization rule");
+  	Identity iden=context.getObjectById(Identity.class, "402881546bae66b3016bb5b7f19c023c");
+  	String firstName=iden.getAttribute("firstname");
+  	String lastName=iden.getAttribute("lastname");
+  	String email=iden.getAttribute("email");
+  	String departmentCode=iden.getAttribute("departmentCode");
+  	
+  	
+  	Map m= new HashMap();
+  	m.put("fName", firstName);
+    m.put("lName", lastName);
+    m.put("email", email);
+  	m.put("departmentCode", departmentCode);
+  
+                                 
+                                   
+		return m;</Source>
+</Rule>
