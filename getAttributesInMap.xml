@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule created="1565208200607" id="4028808d6c657823016c6dadc59f0156" language="beanshell" modified="1565213710715" name="DX: Rule for HW 4.1">
+  <Description>This rule is to return firstname, lastname, email, department of any one Identity in the HashMap.
+    This rule is not of any type so it is importing Identity object and using context object to retrive identity
+  </Description>
+  <Source>
+  //1. Write a rule to return firstname, lastname, email, department of any one Identity in the HashMap.
+  
+  import org.apache.log4j.Logger;
+  import sailpoint.object.Identity;
+  import sailpoint.object.Application;
+  import java.util.Map;
+  import java.util.HashMap;
+  
+  Logger logger= Logger.getLogger("dexperts.us");
+  logger.info("This is a info log");
+ 	Identity iden= context.getObjectById(Identity.class,"4028808d6c657823016c693192c90068");
+  logger.info("Identity is " + iden);
+  String firstName= iden.getAttribute("firstname");
+  String lastName= iden.getAttribute("lastname");
+  String email= iden.getAttribute("email");
+  String departmentCode=iden.getAttribute("departmentCode");
+  
+  
+  Map map = new HashMap();
+  
+  	Map map= new HashMap();
+  	map.put("fName", firstName);
+    map.put("lName", lastName);
+    map.put("email", email);
+  	map.put("departmentCode", departmentCode);
+  
+                                 
+                                   
+		return map;
+  
+  
+
+  
+  </Source>
+</Rule>
