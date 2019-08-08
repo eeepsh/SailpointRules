@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule created="1565232679389" id="4028808d6c657823016c6f2349dd0187" language="beanshell" modified="1565240251098" name="DX: Attributes Of All Identities Rule HW 4.2">
+  <Description>This rule is configured on the application and is called after the connector has build a ResourceObject from the native application data.
+
+Initially designed for non-rule based connectors to add SPPrivileged flag to an object, but could be used to do any transformations.</Description>
+  <Source>//2. Write a rule to to return firstname, lastname, email, department of all the Identity in the list.
+
+ import org.apache.log4j.Logger;
+  import sailpoint.object.Identity;
+  import sailpoint.object.Application;
+  import java.util.List;
+  import java.util.ArrayList;
+  
+  Logger logger= Logger.getLogger("dexperts.us");
+  logger.info("This is a info log");
+  
+  List idenList = new ArrayList();
+ 	idenList= context.getObjects(Identity.class);
+  logger.info("Identity is " + idenList);
+  
+  List resultList = new ArrayList();
+  for(Identity all: idenList){
+    	resultList.add(all.getAttribute("firstname"));
+ 		 	resultList.add(all.getAttribute("lastname"));
+  		resultList.add(all.getAttribute("email"));
+  		//resultList.add(all.getAttribute("departmentCode"));
+  
+  }
+  
+  logger.info("result is "+ resultList);
+  	return resultList;
+      </Source>
+</Rule>
