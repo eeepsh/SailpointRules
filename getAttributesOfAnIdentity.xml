@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule created="1565232679389" id="4028808d6c657823016c6f2349dd0187" language="beanshell" modified="1565315594752" name="DX:Rule to return attributes of an Identity Hw 5.2">
+  <Description>2. Write a rule to return employeeId, positioncode, jobcode, username of an Identity in a List.</Description>
+  <Source>//2. 2. Write a rule to return employeeId, positioncode, jobcode, username of an Identity in a List.
+ import org.apache.log4j.Logger;
+  import sailpoint.object.Identity;
+  import sailpoint.object.Application;
+  import java.util.List;
+  import java.util.ArrayList;
+  
+  Logger logger= Logger.getLogger("dexperts.us");
+  logger.info("This is a info log");
+  
+  List idenList = new ArrayList();
+ 	Identity iden= context.getObjectById(Identity.class, "4028808d6c657823016c72acbb0602de");
+  logger.info("Identity is " + iden);
+  
+  String employeeId= "Employee id of an Identity = "+ iden.getAttribute("employeeId");
+  String positioncode= "positionCode of an Identity = "+ iden.getAttribute("positionCode");
+  String jobCode= "Job Code of an Identity = "+ iden.getAttribute("jobCode");
+  String username= "UserName of an Identity = "+ iden.getAttribute("displayName");
+  
+  
+  List resultList = new ArrayList();
+ 
+    	resultList.add(employeeId);
+ 		 	resultList.add(positioncode);
+  		resultList.add(jobCode);
+  		resultList.add(username);
+  
+  
+  
+  logger.info("result is "+ resultList);
+  	return resultList;
+      </Source>
+</Rule>
