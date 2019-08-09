@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule created="1565372805936" id="4028808d6c657823016c777d732f052a" language="beanshell" modified="1565373390400" name="DX:ManagedEntitlementCustRule HW7.3" type="ManagedAttributePromotion">
+  <Description>A ManagedAttributePromotion rule is called when ManagedAttributes are automatically created during aggregation, refresh, or from the missing entitlement descriptions task.
+
+This can modify the ManagedAttribute that is passed in to set fields such as owner, requestable, or explanations before they are saved.</Description>
+  <Signature>
+    <Inputs>
+      <Argument name="log">
+        <Description>
+          The log object associated with the SailPointContext.
+        </Description>
+      </Argument>
+      <Argument name="context">
+        <Description>
+          A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+        </Description>
+      </Argument>
+      <Argument name="attribute">
+        <Description>
+          The sailpoint.object.ManagedAttribute to modify during promotion.
+        </Description>
+      </Argument>
+      <Argument name="application">
+        <Description>
+          The sailpoint.object.Application the managed attribute is from.
+        </Description>
+      </Argument>
+      <Argument name="state" type="Map">
+        <Description>
+          A Map that contains managed attribute promotion shared state during a task run.
+        </Description>
+      </Argument>
+    </Inputs>
+  </Signature>
+  <Source>
+  // Write managed entitlement customization rule to set requestable false as default and add description in entitlement.
+  import org.apache.log4j.Logger;
+  import sailpoint.object.*;
+  import java.util.Locale;
+  
+  Logger logger= Logger.getLogger("dexperts.us");
+  logger.info("Manages Entitlement Customization Rule");
+  
+  attribute.setRequestable(false);
+  String description="Managed Entitlement Customization Rule for HW 7 quesn 3");
+  attributr.addDescritption(Locale.US.toString().description);
+</Source>
+</Rule>
