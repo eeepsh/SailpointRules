@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule created="1565317333348" id="4028808d6c657823016c742f01640376" language="beanshell" modified="1565319104108" name="DX:Rule to return email and managerId of all the Identities Hw 5.3">
+  <Description>3. Write a rule to return email and managerId of all the Identities..</Description>
+  <Source>import org.apache.log4j.Logger;
+  import sailpoint.object.Identity;
+  import sailpoint.object.Application;
+  import sailpoint.object.Link;
+  import java.util.List;
+  import java.util.ArrayList;
+  
+  Logger logger= Logger.getLogger("dexperts.us");
+  logger.info("This is a info log");
+  
+  List idenList = new ArrayList();
+  idenList= context.getObjects(Identity.class);
+  logger.info("Identity is " + idenList);
+  
+    List resultList = new ArrayList();
+  
+  for(Identity id: idenList){
+    
+    resultList.add(id.getAttribute("email"));
+    
+    List linkList=id.getLinks();
+    for(Link li: linkList){
+       resultList.add(li.getAttribute("managerId"));
+  }
+  }
+  
+
+  
+  
+  
+  logger.info("result is "+ resultList);
+    return resultList;</Source>
+</Rule></Rule>
