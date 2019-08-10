@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule created="1565391892093" id="4028808d6c657823016c78a0ae7d0786" language="beanshell" modified="1565395755168" name="DX:CreationRuleToSetUserNameAndPassword" type="IdentityCreation">
+  <Description>Identity creation rules are used to set attributes on new Identity objects when they are created.  New identities may be created during the aggregation of application accounts, or optionally created after pass-through authentication.
+
+One common operation is to change the name property of the identity when the default application name is complex (such as a directory DN).
+
+Another common operation is to assign a set of initial capabilities based on the attributes pulled from the application account.</Description>
+  <Signature returnType="void">
+    <Inputs>
+      <Argument name="log">
+        <Description>
+          The log object associated with the SailPointContext.
+        </Description>
+      </Argument>
+      <Argument name="context">
+        <Description>
+          A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+        </Description>
+      </Argument>
+      <Argument name="environment" type="Map">
+        <Description>
+          Arguments passed to the aggregation task.
+        </Description>
+      </Argument>
+      <Argument name="application">
+        <Description>
+          Application being aggregated.
+        </Description>
+      </Argument>
+      <Argument name="account" type="ResourceObject">
+        <Description>
+          The resource account for the identity being created.
+        </Description>
+      </Argument>
+      <Argument name="identity" type="Identity">
+        <Description>
+          The identity that is being created.
+        </Description>
+      </Argument>
+    </Inputs>
+  </Signature>
+  <Source>
+	import org.apache.log4j.Logger;
+	Logger logger = Logger.getLogger("dexperts.us");
+	String username=account.getStringAttribute("userName");
+	logger.info("Existing user name is " + username); 
+  	String firstName=account.getStringAttribute("firstName");
+    String lastName=account.getStringAttribute("lastName");
+  	String userName=firstName +"."+lastName;
+    userName=userName.toLowerCase();
+  if(username == null ||!username.equals(userName)){ 
+  
+     identity.setName(userName);
+  }
+   
+  	logger.info("New username is  "+userName); 
+    
+ 
+  //set default password for all user other than spadmin
+  identity.setPassword("admin");</Source>
+</Rule>
