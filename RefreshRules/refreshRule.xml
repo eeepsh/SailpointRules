@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule created="1565411540986" id="4028808d6c657823016c79cc7ffa0d63" language="beanshell" modified="1565412227395" name="DX: Refresh Rule" type="Refresh">
+  <Description>Test Refresh Rule </Description>
+  <Signature returnType="void">
+    <Inputs>
+      <Argument name="log">
+        <Description>
+          The log object associated with the SailPointContext.
+        </Description>
+      </Argument>
+      <Argument name="context">
+        <Description>
+          A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+        </Description>
+      </Argument>
+      <Argument name="environment" type="Map">
+        <Description>
+          Arguments passed to the aggregation task.
+        </Description>
+      </Argument>
+      <Argument name="identity" type="Identity">
+        <Description>
+          Identity that is created
+        </Description>
+      </Argument>
+    </Inputs>
+  </Signature>
+  <Source>//Write correlation rule to correlate accounts to Identity in identity-cube.
+  //It is good to set password from refresh rule than creation rule
+  	import org.apache.log4j.Logger;
+ 		
+ 		Logger logger= Logger.getLogger("dexperts.us");
+  	logger.info("I am from Refresh Rule");
+  	
+  String name=identity.getName();
+  if(!"spadmin".equals(name)){
+    identity.setPassword("xyzzy");
+    identity.setAttribute("pwdResetDate", new Date());
+    
+  }
+    
+    return returnMap;</Source>
+</Rule>
